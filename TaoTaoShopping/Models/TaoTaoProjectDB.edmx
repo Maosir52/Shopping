@@ -1,0 +1,731 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TaoTaoProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="address">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="mark" Type="varchar" MaxLength="50" />
+          <Property Name="createtime" Type="date" />
+          <Property Name="uid" Type="int" />
+        </EntityType>
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pwd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nickname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="power" Type="smallint" Nullable="false" />
+          <Property Name="createtime" Type="date" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="catename" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="detail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="uid" Type="int" Nullable="false" />
+          <Property Name="shop_id" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="date" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uid" Type="int" />
+          <Property Name="order_num" Type="varchar" MaxLength="50" />
+          <Property Name="sum_price" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="mark" Type="varchar" MaxLength="50" />
+          <Property Name="createtime" Type="date" />
+          <Property Name="is_pay" Type="smallint" />
+          <Property Name="state" Type="smallint" />
+          <Property Name="pay_way" Type="varchar" MaxLength="20" />
+          <Property Name="address_id" Type="int" />
+          <Property Name="address" Type="varchar" MaxLength="250" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="order_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" />
+          <Property Name="count" Type="int" />
+          <Property Name="price" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="sum_price" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="shop_id" Type="int" />
+          <Property Name="title" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="shop_car">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uid" Type="int" />
+          <Property Name="shopid" Type="int" />
+          <Property Name="shopNum" Type="int" />
+          <Property Name="createtime" Type="date" />
+        </EntityType>
+        <EntityType Name="shopping">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="cid" Type="int" />
+          <Property Name="price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="sale_price" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="number" Type="int" Nullable="false" />
+          <Property Name="detail" Type="text" Nullable="false" />
+          <Property Name="img" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="shop_number" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pwd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nickname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sex" Type="smallint" />
+          <Property Name="introduce" Type="varchar" MaxLength="50" />
+          <Property Name="age" Type="int" />
+          <Property Name="img" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK_address_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="address" Type="Self.address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="address">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_shopping">
+          <End Role="shopping" Type="Self.shopping" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shopping">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="shop_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_user">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_order">
+          <End Role="order" Type="Self.order" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_shopping">
+          <End Role="shopping" Type="Self.shopping" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="order_detail" Type="Self.order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shopping">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="shop_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_shop_car_shopping">
+          <End Role="shopping" Type="Self.shopping" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="shop_car" Type="Self.shop_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shopping">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shop_car">
+              <PropertyRef Name="shopid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_shop_car_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="shop_car" Type="Self.shop_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shop_car">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_shopping_category">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="shopping" Type="Self.shopping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shopping">
+              <PropertyRef Name="cid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TaoTaoProjectDBModelStoreContainer">
+          <EntitySet Name="address" EntityType="Self.address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_detail" EntityType="Self.order_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shop_car" EntityType="Self.shop_car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shopping" EntityType="Self.shopping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_address_user" Association="Self.FK_address_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="address" EntitySet="address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_shopping" Association="Self.FK_comment_shopping">
+            <End Role="shopping" EntitySet="shopping" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_user" Association="Self.FK_comment_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_order" Association="Self.FK_order_detail_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_shopping" Association="Self.FK_order_detail_shopping">
+            <End Role="shopping" EntitySet="shopping" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_user" Association="Self.FK_order_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shop_car_shopping" Association="Self.FK_shop_car_shopping">
+            <End Role="shopping" EntitySet="shopping" />
+            <End Role="shop_car" EntitySet="shop_car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shop_car_user" Association="Self.FK_shop_car_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="shop_car" EntitySet="shop_car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shopping_category" Association="Self.FK_shopping_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="shopping" EntitySet="shopping" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TaoTaoProjectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="power" Type="Int16" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="TaoTaoProjectDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admin" EntityType="Self.admin" />
+          <EntitySet Name="user" EntityType="TaoTaoProjectDBModel.user" />
+          <EntitySet Name="category" EntityType="TaoTaoProjectDBModel.category" />
+          <EntitySet Name="shopping" EntityType="TaoTaoProjectDBModel.shopping" />
+          <AssociationSet Name="FK_shopping_category" Association="TaoTaoProjectDBModel.FK_shopping_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="shopping" EntitySet="shopping" />
+          </AssociationSet>
+          <EntitySet Name="comment" EntityType="TaoTaoProjectDBModel.comment" />
+          <AssociationSet Name="FK_comment_shopping" Association="TaoTaoProjectDBModel.FK_comment_shopping">
+            <End Role="shopping" EntitySet="shopping" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_user" Association="TaoTaoProjectDBModel.FK_comment_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <EntitySet Name="order" EntityType="TaoTaoProjectDBModel.order" />
+          <EntitySet Name="order_detail" EntityType="TaoTaoProjectDBModel.order_detail" />
+          <AssociationSet Name="FK_order_detail_order" Association="TaoTaoProjectDBModel.FK_order_detail_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_user" Association="TaoTaoProjectDBModel.FK_order_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_detail_shopping" Association="TaoTaoProjectDBModel.FK_order_detail_shopping">
+            <End Role="shopping" EntitySet="shopping" />
+            <End Role="order_detail" EntitySet="order_detail" />
+          </AssociationSet>
+          <EntitySet Name="address" EntityType="TaoTaoProjectDBModel.address" />
+          <AssociationSet Name="FK_address_user" Association="TaoTaoProjectDBModel.FK_address_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="address" EntitySet="address" />
+          </AssociationSet>
+          <EntitySet Name="shop_car" EntityType="TaoTaoProjectDBModel.shop_car" />
+          <AssociationSet Name="FK_shop_car_shopping" Association="TaoTaoProjectDBModel.FK_shop_car_shopping">
+            <End Role="shopping" EntitySet="shopping" />
+            <End Role="shop_car" EntitySet="shop_car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shop_car_user" Association="TaoTaoProjectDBModel.FK_shop_car_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="shop_car" EntitySet="shop_car" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nickname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sex" Type="Int16" />
+          <Property Name="introduce" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="img" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="comment" Relationship="TaoTaoProjectDBModel.FK_comment_user" FromRole="user" ToRole="comment" />
+          <NavigationProperty Name="order" Relationship="TaoTaoProjectDBModel.FK_order_user" FromRole="user" ToRole="order" />
+          <NavigationProperty Name="address" Relationship="TaoTaoProjectDBModel.FK_address_user" FromRole="user" ToRole="address" />
+          <NavigationProperty Name="shop_car" Relationship="TaoTaoProjectDBModel.FK_shop_car_user" FromRole="user" ToRole="shop_car" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="catename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="shopping" Relationship="TaoTaoProjectDBModel.FK_shopping_category" FromRole="category" ToRole="shopping" />
+        </EntityType>
+        <EntityType Name="shopping">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="cid" Type="Int32" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="sale_price" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="number" Type="Int32" Nullable="false" />
+          <Property Name="detail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="img" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="shop_number" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="category" Relationship="TaoTaoProjectDBModel.FK_shopping_category" FromRole="shopping" ToRole="category" />
+          <NavigationProperty Name="comment" Relationship="TaoTaoProjectDBModel.FK_comment_shopping" FromRole="shopping" ToRole="comment" />
+          <NavigationProperty Name="order_detail" Relationship="TaoTaoProjectDBModel.FK_order_detail_shopping" FromRole="shopping" ToRole="order_detail" />
+          <NavigationProperty Name="shop_car" Relationship="TaoTaoProjectDBModel.FK_shop_car_shopping" FromRole="shopping" ToRole="shop_car" />
+        </EntityType>
+        <Association Name="FK_shopping_category">
+          <End Type="TaoTaoProjectDBModel.category" Role="category" Multiplicity="0..1" />
+          <End Type="TaoTaoProjectDBModel.shopping" Role="shopping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shopping">
+              <PropertyRef Name="cid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="detail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="uid" Type="Int32" Nullable="false" />
+          <Property Name="shop_id" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="shopping" Relationship="TaoTaoProjectDBModel.FK_comment_shopping" FromRole="comment" ToRole="shopping" />
+          <NavigationProperty Name="user" Relationship="TaoTaoProjectDBModel.FK_comment_user" FromRole="comment" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_comment_shopping">
+          <End Type="TaoTaoProjectDBModel.shopping" Role="shopping" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TaoTaoProjectDBModel.comment" Role="comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shopping">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="shop_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_user">
+          <End Type="TaoTaoProjectDBModel.user" Role="user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TaoTaoProjectDBModel.comment" Role="comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uid" Type="Int32" />
+          <Property Name="order_num" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sum_price" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="mark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Precision="0" />
+          <Property Name="is_pay" Type="Int16" />
+          <Property Name="state" Type="Int16" />
+          <NavigationProperty Name="order_detail" Relationship="TaoTaoProjectDBModel.FK_order_detail_order" FromRole="order" ToRole="order_detail" />
+          <NavigationProperty Name="user" Relationship="TaoTaoProjectDBModel.FK_order_user" FromRole="order" ToRole="user" />
+          <Property Name="pay_way" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="address_id" Type="Int32" />
+          <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="order_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" />
+          <Property Name="count" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="sum_price" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="shop_id" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="order" Relationship="TaoTaoProjectDBModel.FK_order_detail_order" FromRole="order_detail" ToRole="order" />
+          <NavigationProperty Name="shopping" Relationship="TaoTaoProjectDBModel.FK_order_detail_shopping" FromRole="order_detail" ToRole="shopping" />
+        </EntityType>
+        <Association Name="FK_order_detail_order">
+          <End Type="TaoTaoProjectDBModel.order" Role="order" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TaoTaoProjectDBModel.order_detail" Role="order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_user">
+          <End Type="TaoTaoProjectDBModel.user" Role="user" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TaoTaoProjectDBModel.order" Role="order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_detail_shopping">
+          <End Type="TaoTaoProjectDBModel.shopping" Role="shopping" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TaoTaoProjectDBModel.order_detail" Role="order_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shopping">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_detail">
+              <PropertyRef Name="shop_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="address">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="address1" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="mark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Precision="0" />
+          <Property Name="uid" Type="Int32" />
+          <NavigationProperty Name="user" Relationship="TaoTaoProjectDBModel.FK_address_user" FromRole="address" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_address_user">
+          <End Type="TaoTaoProjectDBModel.user" Role="user" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TaoTaoProjectDBModel.address" Role="address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="address">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="shop_car">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uid" Type="Int32" />
+          <Property Name="shopid" Type="Int32" />
+          <Property Name="shopNum" Type="Int32" />
+          <Property Name="createtime" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="shopping" Relationship="TaoTaoProjectDBModel.FK_shop_car_shopping" FromRole="shop_car" ToRole="shopping" />
+          <NavigationProperty Name="user" Relationship="TaoTaoProjectDBModel.FK_shop_car_user" FromRole="shop_car" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_shop_car_shopping">
+          <End Type="TaoTaoProjectDBModel.shopping" Role="shopping" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TaoTaoProjectDBModel.shop_car" Role="shop_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shopping">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shop_car">
+              <PropertyRef Name="shopid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_shop_car_user">
+          <End Type="TaoTaoProjectDBModel.user" Role="user" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TaoTaoProjectDBModel.shop_car" Role="shop_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shop_car">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TaoTaoProjectDBModelStoreContainer" CdmEntityContainer="TaoTaoProjectDBEntities">
+          <EntitySetMapping Name="admin">
+            <EntityTypeMapping TypeName="TaoTaoProjectDBModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="power" ColumnName="power" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="TaoTaoProjectDBModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="introduce" ColumnName="introduce" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="category">
+            <EntityTypeMapping TypeName="TaoTaoProjectDBModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="catename" ColumnName="catename" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shopping">
+            <EntityTypeMapping TypeName="TaoTaoProjectDBModel.shopping">
+              <MappingFragment StoreEntitySet="shopping">
+                <ScalarProperty Name="shop_number" ColumnName="shop_number" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="detail" ColumnName="detail" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="sale_price" ColumnName="sale_price" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="cid" ColumnName="cid" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comment">
+            <EntityTypeMapping TypeName="TaoTaoProjectDBModel.comment">
+              <MappingFragment StoreEntitySet="comment">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="shop_id" ColumnName="shop_id" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="detail" ColumnName="detail" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order">
+            <EntityTypeMapping TypeName="TaoTaoProjectDBModel.order">
+              <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="pay_way" ColumnName="pay_way" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="is_pay" ColumnName="is_pay" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="mark" ColumnName="mark" />
+                <ScalarProperty Name="sum_price" ColumnName="sum_price" />
+                <ScalarProperty Name="order_num" ColumnName="order_num" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_detail">
+            <EntityTypeMapping TypeName="TaoTaoProjectDBModel.order_detail">
+              <MappingFragment StoreEntitySet="order_detail">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="shop_id" ColumnName="shop_id" />
+                <ScalarProperty Name="sum_price" ColumnName="sum_price" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="address">
+            <EntityTypeMapping TypeName="TaoTaoProjectDBModel.address">
+              <MappingFragment StoreEntitySet="address">
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="mark" ColumnName="mark" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address1" ColumnName="address" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shop_car">
+            <EntityTypeMapping TypeName="TaoTaoProjectDBModel.shop_car">
+              <MappingFragment StoreEntitySet="shop_car">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="shopNum" ColumnName="shopNum" />
+                <ScalarProperty Name="shopid" ColumnName="shopid" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

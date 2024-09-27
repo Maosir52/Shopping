@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7aa3962fe4f3404097a6e39b33480f25" Name="Diagram1">
+        <EntityTypeShape EntityType="TaoTaoProjectDBModel.admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaoTaoProjectDBModel.user" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TaoTaoProjectDBModel.category" Width="1.5" PointX="0.75" PointY="5.625" />
+        <EntityTypeShape EntityType="TaoTaoProjectDBModel.shopping" Width="1.5" PointX="3" PointY="5" />
+        <AssociationConnector Association="TaoTaoProjectDBModel.FK_shopping_category" />
+        <EntityTypeShape EntityType="TaoTaoProjectDBModel.comment" Width="1.5" PointX="5.625" PointY="3.25" />
+        <AssociationConnector Association="TaoTaoProjectDBModel.FK_comment_shopping" />
+        <AssociationConnector Association="TaoTaoProjectDBModel.FK_comment_user" />
+        <EntityTypeShape EntityType="TaoTaoProjectDBModel.order" Width="1.5" PointX="5.625" PointY="7.25" />
+        <EntityTypeShape EntityType="TaoTaoProjectDBModel.order_detail" Width="1.5" PointX="7.875" PointY="6.25" />
+        <AssociationConnector Association="TaoTaoProjectDBModel.FK_order_detail_order" />
+        <AssociationConnector Association="TaoTaoProjectDBModel.FK_order_user" />
+        <AssociationConnector Association="TaoTaoProjectDBModel.FK_order_detail_shopping" />
+        <EntityTypeShape EntityType="TaoTaoProjectDBModel.address" Width="1.5" PointX="5.625" PointY="0.75" />
+        <AssociationConnector Association="TaoTaoProjectDBModel.FK_address_user" />
+        <EntityTypeShape EntityType="TaoTaoProjectDBModel.shop_car" Width="1.5" PointX="8.625" PointY="2.375" />
+        <AssociationConnector Association="TaoTaoProjectDBModel.FK_shop_car_shopping" />
+        <AssociationConnector Association="TaoTaoProjectDBModel.FK_shop_car_user" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

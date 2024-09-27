@@ -1,0 +1,8 @@
+﻿
+@{
+    ViewBag.Title = "BackIndex";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h1>欢迎使用智能商城</h1>
+<p>欢迎你用户：<strong>@(Session["nick"] != null ? Session["nick"].ToString():"")</strong>。登录时间：@DateTime.Now</p>

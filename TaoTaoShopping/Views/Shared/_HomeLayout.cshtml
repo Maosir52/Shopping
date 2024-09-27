@@ -1,0 +1,254 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>智能商城</title>
+    <link rel="stylesheet" type="text/css" href="/Content/css/head.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/css/footer.css" />
+    <script src="/Content/js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function () {
+            //轮播图效果
+            var c = 0;
+            //加一个时间事件
+            function timer() {
+                //获得序号
+                c++;
+                if (c == 6) {
+                    c = 0;
+                }
+                //				    alert(c);
+                //让自己显示，兄弟元素隐藏
+                $("#inBaner .big_eye_pic li").eq(c).stop().fadeIn(1800).siblings().fadeOut(800);
+                //改变颜色
+                $("#inBaner .btn ul li").eq(c).stop().addClass("cur").siblings().removeClass("cur");
+            }
+            time = setInterval(timer, 2000);
+            //给图片添加一个移入移出效果
+            $("#inBaner").hover(function () {
+                //停止时间
+                clearInterval(time);
+            }, function () {
+                //时间继续
+                time = setInterval(timer, 2000);
+            });
+            //给色块添加一个移入移出事件
+            $("#inBaner .btn ul li").mouseenter(function () {
+                var n = $(this).index();
+                //让第一个人图片显示 其余的隐藏
+                $("#inBaner .big_eye_pic li").eq(n).stop().show().siblings().hide();
+                //改变颜色
+                $("#inBaner .btn ul li").eq(n).stop().addClass("cur").siblings().removeClass("cur");
+            });
+            //添加一个点击事件
+            $(".her_top .her_title .her_menu li").click(function () {
+                var n = $(this).index();
+                //切换颜色
+                $(".her_menu li").eq(n).addClass("current").siblings().removeClass("current");
+                //切换商品
+                $(".her_top .pro_con").eq(n).show().siblings(".pro_con").hide();
+            })
+            //搜索框下滑
+            $(window).scroll(function () {
+                //获得滚动条距离顶部距离
+                var t = $(document).scrollTop();
+                if (t > 530) {
+                    $("#nav").show();
+                } else {
+                    $("#nav").hide();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--顶部公用-->
+    <div class="header">
+        <!--顶部导航-->
+        <div class="header_top">
+            <div class="w1200">
+                <div class="h_t_l">
+                    <div class="login_l">
+                        <span>欢迎来到智能商城!</span>
+                        @if (Session["nick"] != null)
+                        {
+                            <span>
+                                用户：
+                                <img src="@Session["img"]" width="35" height="35" style="vertical-align:middle;border-radius:50%;" alt="Alternate Text" />
+                                @Session["nick"]
+                            </span>
+                            <a class="a_login" href="/Home/Logout">退出</a>
+                            <a class="a_login" href="/Home/BackIndex">个人中心</a>
+                        }
+                        else
+                        {
+                            <a class="a_login" href="/Home/Login">[登录]</a>
+                            <span class="line"></span>
+                            <a class="" href="/Home/Register">[注册]</a>
+                        }
+
+                    </div>
+                </div>
+                <div class="h_t_r">
+                    <ul>
+                        <li>
+                            <i class="tel_icon"></i>
+                            <a href="">400-800-0000</a>
+                            <span class="line"></span>
+                        </li>
+                        <li>
+                            <a href="">下载智能商城app</a>
+                            <span class="line"></span>
+                        </li>
+                        <li>
+                            <a href="">客服中心</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--搜索-->
+        <div class="full_sc">
+            <div class="w1200 header_conter">
+                <div class="h_c_logo">
+                </div>
+                <div class="h_c_bz">
+                    <img src="/Content/image/top_center.jpg" style="width: 467px;height: 29px" />
+                </div>
+                <div class="h_c_search">
+                    <div class="search_input">
+                        <form action="/Home/List" method="get">
+                            <input type="text" style="color: rgb(102, 102, 102);" name="keyword" class="text_search" placeholder="请输入商品的关键字" value="@(Request.QueryString["keyword"] != null ? Request.QueryString["keyword"] :"")" />
+                            <input type="submit" class="btn_search" value="搜索" />
+                        </form>
+                    </div>
+                    <div class="search_key">
+                        <ul>
+                            <li>
+                                <a href="/Home/List?keyword=太阳镜">太阳镜</a>
+                            </li>
+                            <li>
+                                <a href="/Home/List?keyword=面包">面包</a>
+                            </li>
+                            <li>
+                                <a href="/Home/List?keyword=毛巾">毛巾</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="h_c_right">
+                    <a href="/Home/Car" class="h_c_r_car">
+                        <b class="b_car1"></b>
+                        <span>我的购物车</span>
+                        <b class="b_car2"></b>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--菜单-->
+        <div class="full_nav">
+            <div class="w1200">
+                <ul class="nav">
+                    <li class="home">
+                        <a href="/Home/Index" style="color: #C41F3A;">首页</a>
+                    </li>
+                    <li>
+                        <a href="/Home/List?cid=1">精选品牌</a>
+                    </li>
+                    <li>
+                        <a href="/Home/List?cid=3">全球购</a>
+                    </li>
+                    <li>
+                        <a href="/Home/List?cid=4">品牌馆</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--头部end-->
+    @* 动态替换布局页的内容 *@
+    @RenderBody()
+
+    <!--底部公用-->
+    <div class="footer">
+        <div class="footer_help w1200">
+            <div class="footer1_l">
+                <dl class="helpDl">
+                    <dt><h5>使用帮助</h5></dt>
+                    <dd><a href="">新手指南 </a></dd>
+                    <dd><a href="">常见问题 </a></dd>
+                    <dd><a href="">用户协议 </a></dd>
+                </dl>
+                <dl class="helpDl">
+                    <dt><h5>会员服务</h5></dt>
+                    <dd><a href="">积分政策  </a></dd>
+                    <dd><a href="">会员权益  </a></dd>
+                    <dd><a href="">会员等级  </a></dd>
+                </dl>
+                <dl class="helpDl">
+                    <dt><h5>支付方式</h5></dt>
+                    <dd><a href="">积分支付  </a></dd>
+                    <dd><a href="">货到付款  </a></dd>
+                    <dd><a href="">在线支付  </a></dd>
+                    <dd><a href="">优惠券支付  </a></dd>
+                </dl>
+                <dl class="helpDl">
+                    <dt><h5>配送方式</h5></dt>
+                    <dd><a href="">包邮政策   </a></dd>
+                    <dd><a href="">费用说明   </a></dd>
+                    <dd><a href="">配送说明   </a></dd>
+                </dl>
+                <dl class="helpDl">
+                    <dt><h5>售后服务</h5></dt>
+                    <dd><a href="">电子发票   </a></dd>
+                    <dd><a href="">售后咨询   </a></dd>
+                    <dd><a href="">退货办理   </a></dd>
+                    <dd><a href="">退货政策   </a></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="footer_nav">
+            <div class="w720">
+                <ul>
+                    <li>
+                        <a href="">关于智能商城 </a>
+                        <span class="line"></span>
+                    </li>
+                    <li>
+                        <a href="">投资者关系 </a>
+                        <span class="line"></span>
+                    </li>
+                    <li>
+                        <a href="">商家入驻  </a>
+                        <span class="line"></span>
+                    </li>
+                    <li>
+                        <a href="">联系我们 </a>
+                        <span class="line"></span>
+                    </li>
+                    <li>
+                        <a href="/Login/Index">登录商城后台 </a>
+                        <span class="line"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer_bottom">
+            <div class="w1200">
+                <p>
+                    <span class="font_arial">Copyright© 2018-2020  All Rights Reserved </span>
+                    免费服务热线: 400-800-0000
+                    <span class="font_arial">E-Mail: 765723251@qq.com</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--底部end-->
+</body>
+</html>

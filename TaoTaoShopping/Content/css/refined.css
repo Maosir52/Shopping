@@ -1,0 +1,106 @@
+/*大图片*/
+.top_img{
+	width: 100%;
+    height: 380px;
+}
+.top_box{
+	width: 1200px;
+	height: 380px;
+	margin: auto;
+	position: relative;
+    left: -275px;
+}
+.top_box img{
+    text-align: center;
+    height: 380px;
+}
+
+/**
+ * 精品推荐
+ */
+.nav_ter{
+	width: 100%;
+	position: relative;
+}
+.j_nav{
+	width: 100%;
+	margin-top: 30px;
+	overflow: hidden;
+}
+.j_nav h2{
+	border-bottom: 1px solid #4c4c4c;
+	height: 50px;
+	width: 100%;
+	line-height: 50px;
+	font-size: 26px;
+	font-weight: normal;
+	margin-bottom: 15px;
+	color: #303030;
+}
+.j_nav .i_today_zb {
+    background: url("./../image/vedio_icon_list.png") no-repeat scroll -181px -183px;
+    float: left;
+    height: 37px;
+    width: 31px;
+}
+.j_nav ul li{
+	float: left;
+	width: 283px;
+	height: 334px;
+	position: relative;
+	margin-right: 20px;
+	margin-bottom: 15px;
+	border: 1px solid #DBDBDB;
+}
+.j_nav ul li:hover{
+	border:1px solid #C81623;
+	box-shadow: 5px 5px 5px #DBDBDB;
+}
+.j_nav .no-margin{
+	margin-right: 0px;
+}
+.j_nav ul li a{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	background: #525252;
+	color: #FFF;
+}
+.j_nav .span_con{
+	display: block;
+    margin-top: -5px;
+}
+.j_nav ul li img {
+	width: 100%;
+    height: 283px;
+}
+.p_title {
+    font-size: 16px;
+    padding: 0 10px 0;
+    height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.p_price {
+    padding: 0 10px;
+    text-align: left;
+}
+.p_price1 {
+    font-size: 16px;
+}
+.p_price1 span{
+    font-family: arial;
+    font-size: 18px;
+    font-weight: bold;
+}
+.p_price2 {
+    text-decoration: line-through;
+    padding: 0 16px 0 6px;
+}
+.p_zk {
+    background-color: #94193f;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 0 7px;
+}

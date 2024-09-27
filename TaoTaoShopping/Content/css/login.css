@@ -1,0 +1,225 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	line-height: 1.5;
+	background: white;
+	overflow-x: hidden;
+}
+
+body,div{
+	font: inherit;
+	font-family: "微软雅黑", "宋体", "arial", "Hiragino Sans GB", "Microsoft Yahei", "Tahoma", "Helvetica", "STHeiti";
+	vertical-align: baseline;
+	font-size: 12px;
+}
+
+.full_sc {
+	width: 100%;
+	background-color: #fff;
+	float: left;
+}
+.head_cent {
+	width: 1000px;
+	margin: 0 auto;
+}
+.head_cwo {
+	margin-top: 30px;
+	margin-bottom: 19px;
+}
+.ClearFix::after {
+    clear: both;
+    content: '.';
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    visibility: hidden;
+    height: 0;
+}
+.h_logo {
+	float: left;
+	width: 74px;
+	margin-right: 7px;
+}
+
+.h_right {
+	float: right;
+}
+.w980{
+	width: 980px;
+	margin: 0 auto;
+}
+.logo_box{
+	float: left;
+}
+.login_b_l{
+	float: left;
+	width: 600px;
+	text-align: center;
+	padding-top: 23px;
+}
+
+a:link{
+	text-decoration: none;
+}
+
+.login_b_r{
+	float: left;
+	width: 367px;
+	height: 600px;
+	background: url(./../image/login_icon_list.png) 0 -115px no-repeat;
+}
+.loginul{
+	padding: 0 25px;
+}
+.login_h2{
+	padding-top: 23px;
+	padding-bottom: 26px;
+}
+.loginul h2{
+	color: #c41f3a;
+	font-size: 22px;
+	height: 38px;
+	line-height: 38px;
+	font-weight: bold;
+	float: left;
+}
+.lognrtop a {
+    color: #c41f3a;
+    text-decoration: none;
+}
+.lognrtop{
+    float: right;
+    height: 38px;
+    line-height: 38px;
+    text-align: right;
+    font-size: 12px;
+    color: #8c8c8c;
+}
+.from{
+	
+}
+button, input, select, textarea, label {
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+}
+.item{
+    margin-bottom: 10px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.item .itxt {
+    color: #333333;
+    border: 1px solid #c8c8c8;
+    height: 25px;
+    line-height: 25px;
+    padding: 6px 0 6px 6px;
+    width: 293px;
+    font-size: 12px;
+}
+.item .itxt_yzm {
+    width: 157px;
+    float: left;
+}
+.item4 span {
+    float: left;
+}
+.item4 a{
+	color: #595959;
+	text-align: right;
+	font-size: 12px;
+	display: inline-block;
+}
+.items a {
+    margin-left: 11px;
+    color: #444444;
+    font-family: "宋体";
+    font-weight: bold;
+    font-size: 12px;
+    display: block;
+    text-align: center;
+    text-align: center;
+    outline: 0;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    background-color: #f6f6f6;
+    border: 1px solid #c8c8c8;
+    width: 117px;
+    height: 38px;
+    line-height: 38px;
+    vertical-align: top;
+}
+.item4 .forget-pw-safe {
+    float: right;
+    padding-right: 26px;
+    padding-top: 1px;
+}
+.login-btn a {
+    display: block;
+    width: 317px;
+    height: 40px;
+    color: #fff;
+    line-height: 40px;
+    background-color: #94193f;
+    text-align: center;
+    font-size: 14px;
+    font-family: "宋体";
+    font-weight: bold;
+}
+.err_box {
+    height: 23px;
+    line-height: 23px;
+    margin-bottom: 3px;
+    overflow: hidden;
+    width: 100%;
+}
+.container{
+    float:left;
+}
+.container h5{
+	height: 24px;
+	color: #333333;
+	font-size: 12px;
+	line-height: 24px;
+	font-family: "宋体";
+}
+.container ul li{
+	list-style: none;
+	display: inline-block;
+	margin-left: 10px;
+}
+.container li a{
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	float: left;
+	background: url(./../image/login_icon_list.png) 0 0;
+}
+.container li .li_q{
+	background-position: 0 -32px;
+}
+.container li .li_w{
+	background-position: -74px -32px;
+}
+.container li .li_z{
+	background-position: -143px -32px;
+}
+.container li .li_t{
+	background-position: -221px -32px;
+}
+.agree {
+    padding-top: 5px;
+}
+.agree label {
+    color: #767676;
+    padding-left: 6px;
+}
+.agree label span a {
+    color: #c41f3a;
+}

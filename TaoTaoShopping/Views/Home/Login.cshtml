@@ -1,0 +1,87 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>智能商城登录</title>
+    <link rel="stylesheet" type="text/css" href="/Content/css/login.css" />
+</head>
+<body>
+    <div id="append"></div>
+    <div class="full_sc">
+        <div class="head_cent head_cwo ClearFix">
+            <div class="h_logo">
+            </div>
+            <div class="h_right">
+                <img src="/Content/image/top_center.jpg" />
+            </div>
+        </div>
+    </div>
+    <div class="w980 ClearFix">
+        <div class="logo_box ClearFix">
+            <div class="login_b_l ClearFix">
+                <a href="" title="日光生活">
+                    <img style="width: 560px;height: 360px;" src="/Content/image/logo_img.jpg" alt="日光生活" />
+                </a>
+            </div>
+            <div class="login_b_r ClearFix">
+                <div class="loginul ClearFix">
+                    <div class="login_h2 ClearFix">
+                        <h2>登录智能商城</h2>
+                        <div class="lognrtop">
+                            还没有账号<a href="/Home/Register">快速注册</a>
+                        </div>
+                    </div>
+                    <div class="co">
+                        <div class="from">
+                            <form id="myForm" action="" method="post">
+                                <div class="item">
+                                    <input class="itxt" name="username" id="username" placeholder="请输入账号" value="">
+                                    <div class="err_box">
+                                        <div class="err_msg2" style="display: none;">
+                                            登录名可能是您的手机号、邮箱或用户名
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <input class="itxt" placeholder="请输入密码" name="pwd" id="pwd" type="password">
+                                    <div class="err_box">
+                                        <div class="err_msg2" style="display: none;">您的密码可能为字母、数字或符号的组合</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="login-btn">
+                                        <a tabindex="6" id="loginsubmit" class="btn-img btn-entry" href="javascript:;">立即登录</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+@* 引入jquery的类库 *@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $("#loginsubmit").click(function () {
+        //获取用户名和密码回来
+        var username = $("#username").val();
+        var pwd = $("#pwd").val();
+        if (username.length < 1) {
+            alert("请输入用户名！");
+            return;
+        }
+        if (pwd.length < 1) {
+            alert("请输入密码！");
+            return;
+        }
+        
+        //提交表单
+        $("#myForm").submit();
+    });
+</script>

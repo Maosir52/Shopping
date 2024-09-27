@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TaoTaoShopping.Models.shopping>
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="/Content/css/list.css" />
+<div class="w1200">
+    <!--分类导航-->
+    <div class="top_nv">
+        <span><a href="/">首页</a></span>
+        <span>></span>
+        <span><a href="#">商品列表</a></span>
+    </div>
+    <!--分类导航-->
+    <div class="box_list">
+        <div class="sl_list">
+            <ul>
+                @foreach (TaoTaoShopping.Models.shopping item in Model)
+                {
+                <li>
+                    <a href="/Home/Detail?id=@item.id">
+                        <span class="list_img"><img src="@item.img" /></span>
+                        <span class="sl_list_con">
+                            <span class="sl_price">
+                                <b class="sl_price1"><span>¥@item.sale_price </span></b>
+                                <b class="sl_price2"><s>¥@item.price </s></b>
+                            </span>
+                        </span>
+                        <span class="sl_title">@item.title</span>
+                    </a>
+                </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <!--分页-->
+    <div class="page_list">
+        <div class="page_r">
+            <ul>
+                @* 当前页面只有一页时，使用下面的样式 *@
+                @if (ViewBag.pageNum == null | ViewBag.pageNum == 0)
+                {
+                    <li class="a_p_num">
+                        <span>1</span>
+                    </li>
+                }
+                @for (var i = 1; i <= ViewBag.pageNum; i++) { 
+                    <li class="a_p_num">
+                        <a href="?page=@i&cid=@(Request.QueryString["cid"] != null ? int.Parse(Request.QueryString["cid"].ToString()) : 0)&keyword=@(Request.QueryString["keyword"] != null ? Request.QueryString["keyword"] : "")">@i</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <!--分页end-->
+</div>

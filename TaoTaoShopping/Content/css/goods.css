@@ -1,0 +1,107 @@
+/**
+ * 全球购页css
+ */
+.top_img {
+    width: 100%;
+    text-align: center;
+}
+.top_o_imgs{
+    width: 1200px;
+    height: 380px;
+    margin: auto;
+    position: relative;
+    left: -400px;
+}
+.con_list_pic{
+	width: 100%;
+	margin-top: 30px;
+}
+.con_list_pic li {
+    transition: all 0.6s ease 0s;
+    float: left;
+    border: 1px solid #eaeaea;
+    margin-right: 15px;
+    width: 286px;
+    padding: 0 0 10px 0;
+    background-color: #f5f5f5;
+    margin-bottom: 15px;
+    height: 394px;
+    overflow: hidden;
+}
+.con_list_pic li:hover{
+	border: 1px solid #CB2D01;
+}
+.con_list_pic .no-margin{
+	margin-right: 0;
+}
+.a_list_con{
+	display: block;
+	cursor: pointer;
+}
+.p_img {
+    overflow: hidden;
+    width: 100%;
+    height: 286px;
+}
+.p_title {
+    margin-top: 10px;
+    height: 40px;
+    line-height: 20px;
+    font-size: 16px;
+    overflow: hidden;
+    color: #434343;
+    padding: 0 15px;
+}
+.p_p {
+    margin-top: 12px;
+    overflow: hidden;
+    padding: 0 15px;
+}
+.p_img img {
+    overflow: hidden;
+    width: 100%;
+}
+.p_p_left {
+    float: left;
+}
+.p_p_right {
+    float: right;
+}
+.p_p .price2 {
+    padding-left: 0px;
+    display: block;
+    line-height: 1em;
+}
+.p_p .price1 {
+    color: #94193f;
+    font-family: "华文细黑";
+    font-size: 16px;
+    display: block;
+    line-height: 1.8em;
+}
+.p_p .price2 del {
+    color: #969696;
+    font-size: 14px;
+}
+.p_p .price1 span {
+    font-family: Arial;
+    color: #94193f;
+    font-size: 30px;
+}
+.p_p .price1 .money_icon {
+    font-size: 30px;
+    font-family: "华文细黑";
+}
+.mryh_add_car {
+    display: block;
+    margin-top: 15px;
+    width: 52px;
+    height: 28px;
+    background-color: #94193f;
+    line-height: 28px;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: Arial;
+}

@@ -1,0 +1,141 @@
+﻿@model TaoTaoShopping.Models.user
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 align="center">添加用户</h2>
+
+<form action="" id="myForm" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.username, "用户名：", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.pwd, "密码：", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="password" name="pwd" class="form-control" value="" />
+                @Html.ValidationMessageFor(model => model.pwd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nickname, "昵称：", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nickname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nickname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.sex, "性别：", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="sex" class="form-control">
+                    <option value="1">男</option>
+                    <option value="0">女</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.sex, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.introduce, "自我介绍：", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.introduce, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.introduce, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.age, "年龄：", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.age, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.age, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.img, "头像：", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @* 头像上传 *@
+                <input class="width-main input" type="file" datatype="*" id="pic" name="pic" value="" accept="image/*" onchange="upload(event)">
+                <input type="hidden" name="img" id="img" value="" />
+                <div id="showImg"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="添加" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div align="center" class="row">
+    @Html.ActionLink("返回用户列表", "Index")
+</div>
+@* 需要引入jquery插件实现异步上传 *@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    //实现异步上传
+    function upload(event) {
+        var imgPath = $("#pic").val();
+        console.log(imgPath);
+        //判断上传文件的后缀名
+        var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+
+        if (strExtension != 'jpg' && strExtension != 'gif' && strExtension != 'png' && strExtension != 'bmp') {
+            alert("请选择图片文件");
+            return;
+        }
+        //实现文件上传操作
+        if (event.target.files[0].type.search('image') !== -1) {
+            //实现文件图片的上传
+            var formData = new FormData($("#myForm")[0]);//用于创建一个文件流对象
+            //formData.append('pic', $("#img")[0]); //添加文件流 （流名称，流）
+            //console.log(formData);
+            $.ajax({
+                url: "/Upload/file",
+                type: "post",
+                cache: false,
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (res) {
+                    console.log(res);
+                    if (res.trim() == "209") {
+                        alert("请选择图片！");
+                        return;
+                    }
+                    if (res.trim() == "300") {
+                        alert("上传的图片不能为空图片！");
+                        return;
+                    }
+                    if (res.trim() == "400") {
+                        alert("上传的图片失败！");
+                        return;
+                    }
+                    //alert("上传成功！");
+                    $("#showImg").html("<img src='" + res + "' width='50' height='50' /><p style='color:red;'>上传成功！</p>");
+                    //设置上传的图片地址
+                    var res = res.trim(); //去除图片的前后空白字符
+                    $("#img").val(res);
+                },
+                error: function (res) {
+                    alert("上传异常！");
+                }
+            });
+        } else {
+            alert('只支持上传图片');
+        }
+    }
+</script>

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<TaoTaoShopping.Models.shopping>
+@{ 
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<!--轮播区域-->
+<div class="full_big_eye">
+    <!--轮播图-->
+    <div class="full_eye">
+        <div id="inBaner">
+            <ul class="big_eye_pic">
+                <li style="display: block;">
+                    <a href="" class="img_box">
+                        <img src="/Content/image/web-101-101-1.jpg" />
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="tpl">
+                        <img src="/Content/image/web-101-101-2.jpg" />
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="tpl">
+                        <img src="/Content/image/web-101-101-3.jpg" />
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="tpl">
+                        <img src="/Content/image/web-101-101-4.jpg" />
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="tpl">
+                        <img src="/Content/image/web-101-101-5.jpg" />
+                    </a>
+                </li>
+            </ul>
+            <div class="btn">
+                <ul>
+                    <li class="cur"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--轮播图-->
+</div>
+<!--轮播区域-->
+<!--商品区-->
+<div class="w1200">
+
+    <!--第四区-->
+    <div class="day_box">
+        <div class="qinha_title">
+            <div class="v_h2">
+                <p class="h2_top">今日发现</p>
+                <p class="h2_bottom">精致好物 更快乐的生活</p>
+            </div>
+        </div>
+        <ul class="day_goods">
+            @* 循环商品展示 *@
+            @foreach (TaoTaoShopping.Models.shopping item in Model) 
+            {
+                <li>
+                    <a href="/Home/Detail?id=@item.id" class="a_con_list">
+                        <p class="p_img"><img src="@item.img" /></p>
+                    </a>
+                    <p class="p_title">
+                        <span>【优惠：@(item.price-item.sale_price)元】</span>@item.title
+                    </p>
+                    <p class="p_p">
+                        <span class="price1">￥<span>@item.sale_price</span></span>
+                        <span class="price2"><del>￥@item.price</del></span>
+                    </p>
+                </li>
+            }
+        </ul>
+    </div>
+    <!--第四区-->
+</div>
+<!--商品区-->

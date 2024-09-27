@@ -1,0 +1,315 @@
+﻿@model TaoTaoShopping.Models.shopping
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="/Content/css/iemt.css" />
+<div class="w1200">
+    <!--分类导航-->
+    <div class="top_nv">
+        <span><a href="/">首页</a></span>
+        <span>></span>
+        <span><a href="/Home/List?cid=@Model.cid">@Model.category.catename</a></span>
+        <span>></span>
+        <span><a href="#">@Model.title</a></span>
+        <style>
+            .btns {
+                -webkit-transition: all 75ms;
+                -o-transition: all 75ms;
+                transition: all 75ms;
+            }
+
+            .btns {
+                font-weight: bold;
+                text-transform: uppercase;
+                background-repeat: no-repeat;
+                background-position: center center;
+                padding:10px;
+                border:1px solid #ccc;
+                outline:none;
+                border-radius:5px;
+                margin:20px 10px;
+            }
+                .btns:hover{
+                    cursor:pointer;
+                }
+
+                .btn-success {
+                    color: #fff;
+                    background-color: #2ecc71;
+                    border-color: #29b765;
+                    line-height: 20px;
+                }
+            .btn-warning {
+                color: #fff;
+                background-color: #e67e22;
+                border-color: #d67118;
+                line-height: 20px;
+            }
+        </style>
+    </div>
+    <!--分类导航-->
+    <div class="con_content">
+        <!--提交区域-->
+        <div class="con_top">
+            <div class="con_top_l">
+                <div class="tab-w">
+
+                    <div class="divw">
+                        <a href="#">
+                            <span class="zoomPad">
+                                <img src="@Model.img" />
+                            </span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="con_top_r">
+                <div class="detail_top">
+                    <h1 class="detail_tit">@Model.title</h1>
+                    <div class="price_wrap">
+                        <div class="detail_price">
+                            <span class="price_now" style="color:red;">
+                                <b class="em_sign">￥</b>
+                                @Model.sale_price
+                            </span>
+                            <span class="price_now" style="font-size:14px;">
+                                原价：<b class="em_sign">￥</b>
+                                <del>@Model.price</del>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="detail_freight">
+                        商品数量：<span id="nums">@Model.number</span> 
+                    </div>
+                    <div class="detail_freight">
+                        <span class="pop_tit ">运费：</span>
+                        <span id="freight" class="pop_black">包邮</span>
+                        &nbsp;&nbsp;
+                        编号：@Model.shop_number
+                    </div>
+                    <input type="button" id="dec" name="name" class="btns" value="-" />
+                    <input type="number" name="number" id="number" style="width:50px;height:40px;font-size:16px;" value="1" />
+                    <input type="button" id="add" name="name" class="btns" value="+" />
+                    <br />
+                    <input type="button" name="name" id="buyCar" class="btns btn-warning" value="添加购物车" />
+                    <input type="button" name="name" id="buy" class="btns btn-success" value="购买" />
+
+                    <script>
+                        //点击购买事件
+                        $("#buy").click(function () {
+                            //1、判断是否登录了
+                            var isLogin = "@(Session["user_id"]!=null? Session["user_id"].ToString():"0")";
+                            if (isLogin == "0") {
+                                alert("请先登录！");
+                                window.location.href = "/Home/Login";
+                                return;
+                            }
+                            //2、判断购买的数量是不是对得上
+                            var num = $("#number").val();
+                            var nums = $("#nums").val();
+                            if (parseInt(num) > parseInt(nums)) {
+                                alert("购买的商品数量已经超过商品库存！");
+                                return;
+                            }
+                            window.location.href = "/Home/Pay2?shopid=" +@Model.id+"&shopNum=" + num;
+                        });
+
+
+                        //添加购物车
+                        $("#buyCar").click(function () {
+                            var isLogin = "@(Session["user_id"]!=null? Session["user_id"].ToString():"0")";
+                            if (isLogin == "0") {
+                                alert("请先登录！");
+                                window.location.href = "/Home/Login";
+                                return;
+                            }
+                            //登录再执行添加到购物车功能
+                            $.ajax({
+                                url: "/Home/addCar",
+                                type:"post",
+                                data: {
+                                    shopId: "@Model.id",
+                                    shopNum: $("#number").val(),
+                                },
+                                success: function (res) {
+                                    if (res == "200") {
+                                        alert("添加购物车成功！");
+                                    } else {
+                                        alert("添加购物车失败！")
+                                    }
+                                },
+                                error: function (res) {
+                                    alert("请求异常，添加购物车失败！")
+                                },
+                            });
+
+                        });
+                    </script>
+
+
+                </div>
+            </div>
+        </div>
+        <!--提交区域end-->
+        <!--展示区域-->
+        <div class="con_tab">
+            <div class="con_nav">
+                <div class="con_nav_c">
+                    <div class="w1200">
+                        <ul id="chocieBox">
+                            <li class="on " onclick="choice(this,1)"><a href="javascript:;">商品详情</a></li>
+                            <li onclick="choice(this,2)"><a href="javascript:;">用户评价</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="display">
+            <div class="goods_box">
+                <div class="detail_lists">
+                    <div class="d_h2">
+                        <h2>商品详情</h2>
+                    </div>
+                    <div class="detail_con">
+                        <div style="margin: auto;">
+                            @(new HtmlString(Model.detail))
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="appraise_box" style="display:none;">
+                <div class="detail_lists ">
+                    <div class="d_h2 ">
+                        <h2>用户评价</h2>
+                    </div>
+                    <div class="detail_l_con3 ">
+                        @if(Session["user_id"] != null)
+                        {
+                            <div align="center">
+                                <textarea style="width:90%;height:50px;" id="content" placeholder="请输入商品评价！"></textarea>
+                                <br />
+                                <input type="button" onclick="sub()" class="btn-success btns" value="提交评论" />
+                            </div>
+                        }
+                        else
+                        {
+                            <h1 align="center" >登录才能评论</h1>
+                        }
+                    <hr />
+                        <div class="appraise_h2 ">
+                            <div class="appraise_t1 ">评价心得</div>
+                            <div class="appraise_t4 ">用户信息</div>
+                        </div>
+                        <ul>
+                            @foreach (var item in ViewBag.list)
+                            {
+                            <li class="appraise_li ">
+                                <div class="a_li_t1 ">
+                                    <div class="appr_cons ">@item.detail</div>
+                                    <div class="appr_time ">@item.createtime</div>
+                                </div>
+
+                                <div class="a_li_t4 ">
+                                    <img src="@item.user.img "><br><span>@item.user.nickname</span>
+                                </div>
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--展示区域end-->
+    </div>
+</div>
+
+@* 实现页面切换的js，不能少 *@
+<script>
+    function sub() {
+        var content = $("#content").val();
+        if (content.trim().length < 1) {
+            alert("请输入评论内容！");
+            return;
+        }
+        //添加评论
+        $.ajax({
+            url: "/Comment/Create",
+            type:"post",
+            data: {
+                detail: content,
+                uid:@(Session["user_id"]!=null? Session["user_id"].ToString():"0"),
+                createtime: "@DateTime.Now",
+                shop_id:@Model.id
+            },
+            success: function (res) {
+                if (res == "200") {
+                    alert("评论成功！");
+                    window.location.reload();
+                } else {
+                    alert("评论失败！")
+                }
+            },
+            error: function (res) {
+                alert("请求异常，评论失败！")
+            },
+        });
+    }
+
+    function choice(obj, num) {
+        if (num == 1) {
+            //注意下面代码的顺序
+            $("#chocieBox li").removeClass("on");
+            $("#chocieBox li").eq(0).addClass("on");
+            //就这部分
+            $(".goods_box").show();
+            $(".appraise_box").hide();
+        } else {
+            //注意下面代码的顺序
+            $("#chocieBox li").removeClass("on");
+            $("#chocieBox li").eq(1).addClass("on");
+            //就这部分
+            $(".appraise_box").show();
+            $(".goods_box").hide();
+        }
+    }
+
+    //数量-1的操作
+    $("#dec").click(function () {
+        var num = $("#number").val();
+        if (num == 1) {
+            alert("已经是最少的一件，不能再减了！");
+            return;
+        }
+        num = parseInt(num) - 1;
+        $("#number").val(num);
+    })
+    //数量+1的操作
+    $("#add").click(function () {
+        var nums = $("#nums").text(); //商品总数
+        var num = $("#number").val(); //输入框的商品数量
+        if (num >= parseInt(nums)) {
+            alert("已经是商品总数的件数了，不能再加了！");
+            return;
+        }
+        num = parseInt(num) + 1;
+        $("#number").val(num);
+    })
+    //用户输入框的值时也需要进行相关的校验操作
+    $("#number").blur(function () {
+        var num = $("#number").val();
+        var nums = $("#nums").text(); //商品总数
+        num = parseInt(num);
+        nums = parseInt(nums);
+        if (num < 0) {
+            alert("商品件数错误，最小只能为1件！");
+            $("#number").val(1);
+            return;
+        }
+        if (num > nums) {
+            alert("商品总数超标错误！");
+            $("#number").val(nums);
+            return;
+        }
+    });
+</script>

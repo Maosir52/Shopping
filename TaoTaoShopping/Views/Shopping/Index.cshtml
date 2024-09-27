@@ -1,0 +1,90 @@
+﻿@model IEnumerable<TaoTaoShopping.Models.shopping>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 align="center">商品管理</h2>
+
+<p>
+    <a href="/Shopping/Create" class="btn btn-success">添加商品</a>
+</p>
+@* 搜索区域 *@
+<div class="row" style="margin:10px 0;">
+    <div class="col-lg-12">
+        <center>
+            <form action="" method="get">
+                搜索商品名称： <input type="text" class="form-control" style="display:inline-block;width:200px;" name="keyword" value="@(Request.QueryString["keyword"] != null ? Request.QueryString["keyword"]:"" )" placeholder="请输入关键字" /> <input type="submit" name="submit" value="搜索" class="btn btn-info" />
+            </form>
+        </center>
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            商品名称
+        </th>
+        <th>
+            商品原价
+        </th>
+        <th>
+            商品优惠价
+        </th>
+        <th>
+            商品数量
+        </th>
+        <th>
+            商品封面图
+        </th>
+        <th>
+            商品编号
+        </th>
+        <th>
+            商品分类名称
+        </th>
+        <th>操作</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="/Home/Detail?id=@item.id" target="_blank">
+                    @Html.DisplayFor(modelItem => item.title)
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)元
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sale_price)元
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.number)
+            </td>
+            <td>
+                @* 如果图片不存在，可以设置一张默认头像给他 *@
+                @if (string.IsNullOrEmpty(item.img))
+                {
+                    <img src="~/Content/pic/0411171619.png" width="100" height="100" alt="Alternate Text" />
+                }
+                else
+                {
+                    <img src="@Html.DisplayFor(modelItem => item.img)" width="100" height="100" alt="Alternate Text" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shop_number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.category.catename)
+            </td>
+            <td>
+                <a href="/Shopping/Edit?id=@item.id" class="btn btn-warning">编辑</a>
+                <a href="/Shopping/Details?id=@item.id" class="btn btn-success">详情</a>
+                <a href="/Shopping/Delete?id=@item.id" onclick="return confirm('是否删除该数据？')" class="btn btn-danger">删除</a>
+            </td>
+        </tr>
+    }
+
+</table>

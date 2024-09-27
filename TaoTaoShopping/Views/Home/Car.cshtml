@@ -1,0 +1,96 @@
+﻿@model IEnumerable<TaoTaoShopping.Models.shop_car>
+@{
+    ViewBag.Title = "Car";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<div class="w1200">
+    <!-- 购物车核心代码 -->
+    <link rel="stylesheet" href="~/Content/css/buycar.css">
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <h2 class="title">我的购物车</h2>
+    <table class="table">
+        <tr>
+            <td>商品图</td>
+            <td>商品名称</td>
+            <td>商品价格</td>
+            <td>购买数量</td>
+            <td>总金额</td>
+            <td>操作</td>
+        </tr>
+        @{
+            decimal sum = 0;
+        }
+        @foreach (TaoTaoShopping.Models.shop_car item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@item.shopping.img" width="50" height="50" alt="">
+                </td>
+                <td>@item.shopping.title</td>
+                <td>￥@item.shopping.sale_price</td>
+                <td>@item.shopNum</td>
+                <td>￥@(item.shopping.sale_price * item.shopNum)</td>
+                <td>
+                    <a href="javascript:void(0);" onclick="del(@item.shopid)">删除</a>
+                    <input type="hidden" value="@item.shopid" class="shopid">
+                    <input type="hidden" value="@item.shopNum" class="number">
+                </td>
+            </tr>
+            { sum += Convert.ToDecimal(item.shopping.sale_price * item.shopNum); }
+        }
+        <tr>
+            <td colspan="4"></td>
+            <td>总计：￥@sum</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="6" align="center">
+                <input type="button" id="buy" onclick="buy()" value="去结算" class="buyBtn">
+            </td>
+        </tr>
+    </table>
+    <script>
+        function del(id) {
+            //实现删除购物车的商品
+            var isLogin = "@(Session["user_id"]!=null? Session["user_id"].ToString():"0")";
+            if (isLogin == "0") {
+                alert("请先登录！");
+                window.location.href = "/Home/Login";
+                return;
+            }
+            //提示之后，如果用户点击取消，则不会执行删除
+            if (!confirm("是否删除该商品？")) {
+                return false;
+            }
+            //登录再执行添加到购物车功能
+            $.ajax({
+                url: "/Home/delCar",
+                type:"post",
+                data: {
+                    shopId: id
+                },
+                success: function (res) {
+                    if (res == "200") {
+                        alert("删除商品成功！");
+                        window.location.reload();//刷新页面
+                    } else {
+                        alert("删除商品失败！")
+                    }
+                },
+                error: function (res) {
+                    alert("请求异常，删除商品失败！")
+                },
+            });
+        }
+        function buy() {
+            if ($(".table tr").length <= 3) {
+                alert("没有商品需要结算！");
+                return false;
+            }
+            //跳转去结算
+            window.location.href = "/Home/Pay";
+        }
+    </script>
+
+    <!-- 购物车核心代码结束 -->
+</div>

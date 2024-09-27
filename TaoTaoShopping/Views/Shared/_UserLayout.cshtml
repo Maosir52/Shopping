@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-clearmin.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/roboto.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/material-design.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/small-n-flat.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
+    <title>智能商城系统</title>
+</head>
+<body class="cm-no-transition cm-1-navbar">
+    <div id="cm-menu">
+        <nav class="cm-navbar cm-navbar-primary">
+            <div class="cm-flex">
+                @* 修改LOGO为文字 *@
+                <h1><a href="/" style="color:#fff;">智能商城个人中心</a> </h1>
+            </div>
+            <div class="btn btn-primary md-menu-white" data-toggle="cm-menu"></div>
+        </nav>
+        <div id="cm-menu-content">
+            <div id="cm-menu-items-wrapper">
+                <div id="cm-menu-scroller">
+                    @* 这里是左侧菜单区域 *@
+                    <ul class="cm-menu-items">
+                        <li><a href="/Comment/Index2" class="sf-brick">评论管理</a></li>
+                        <li><a href="/Addresse/Index" class="sf-notepad">地址管理</a></li>
+                        <li><a href="/Order/Index2" class="sf-lock-open">我的订单</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header id="cm-header">
+        <nav class="cm-navbar cm-navbar-primary">
+            <div class="btn btn-primary md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
+            <div class="cm-flex">
+                <form id="cm-search" action="index.html" method="get">
+                    <input type="search" name="q" autocomplete="off" placeholder="Search...">
+                </form>
+            </div>
+            @* 这里是用户信息 *@
+            <div class="dropdown pull-right">
+                <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>
+                <ul class="dropdown-menu">
+                    <li class="disabled text-center">
+                        <a style="cursor:default;"><strong>@(Session["nick"] != null ? Session["nick"].ToString():"")</strong></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="/Back/Index"><i class="fa fa-fw fa-user"></i>修改个人信息</a>
+                    </li>
+                    <li>
+                        <a href="/Home/Index"><i class="fa fa-fw fa-user"></i>返回主页</a>
+                    </li>
+                    <li>
+                        <a href="/Home/Logout"><i class="fa fa-fw fa-sign-out"></i>退出系统</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- 主体区域替换 -->
+    <div id="global">
+        <div class="container-fluid" style="background:#fff;">
+            <div class="row cm-fix-height">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <!-- 主体区域替换结束 -->
+    <script src="/assets/js/lib/jquery.min.js"></script>
+    <script src="/assets/js/jquery.mousewheel.min.js"></script>
+    <script src="/assets/js/jquery.cookie.min.js"></script>
+    <script src="/assets/js/fastclick.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/clearmin.min.js"></script>
+    <script src="/assets/js/demo/home.js"></script>
+</body>
+</html>
+

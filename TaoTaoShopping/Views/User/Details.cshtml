@@ -1,0 +1,85 @@
+﻿@model TaoTaoShopping.Models.user
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>用户详情</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            用户名：
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.username)
+        </dd>
+
+        <dt>
+            密码：
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pwd)
+        </dd>
+
+        <dt>
+            昵称：
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nickname)
+        </dd>
+
+        <dt>
+            性别：
+        </dt>
+
+        <dd>
+            @if (Model.sex == 1)
+            {
+                <b>男</b>
+            }
+            else
+            {
+                <b>女</b>
+            }
+        </dd>
+
+        <dt>
+            自我介绍：
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.introduce)
+        </dd>
+
+        <dt>
+            年龄：
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.age)
+        </dd>
+
+        <dt>
+            头像：
+        </dt>
+
+        <dd>
+            @if (string.IsNullOrEmpty(Model.img))
+            {
+                <img src="~/Content/pic/0411171619.png" width="100" height="100" alt="Alternate Text" />
+            }
+            else
+            {
+                <img src="@Model.img" width="100" height="100" alt="Alternate Text" />
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("返回用户管理列表", "Index")
+</p>

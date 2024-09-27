@@ -1,0 +1,183 @@
+﻿@model IEnumerable<TaoTaoShopping.Models.order_detail>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 align="center">订单详情</h2>
+<style>
+    .middle {
+        width: 400px;
+        margin: 0 auto;
+    }
+</style>
+<div class="middle">
+    <dl class="dl-horizontal">
+        <dt>
+            订单编号：
+        </dt>
+
+        <dd>
+            @ViewBag.order.order_num
+        </dd>
+
+        <dt>
+            订单金额：
+        </dt>
+
+        <dd>
+            ￥@ViewBag.order.sum_price
+        </dd>
+
+        <dt>
+            订单备注：
+        </dt>
+
+        <dd>
+            @ViewBag.order.mark
+        </dd>
+
+        <dt>
+            下单时间：
+        </dt>
+
+        <dd>
+            @ViewBag.order.createtime
+        </dd>
+
+        <dt>
+            订单是否已支付：
+        </dt>
+
+        <dd>
+            @if (ViewBag.order.is_pay == 1)
+            {
+                <span>已支付</span>
+            }
+            else
+            {
+                <span class="btn btn-danger">未支付</span>
+            }
+        </dd>
+        <dt>
+            支付方式：
+        </dt>
+
+        <dd>
+            @ViewBag.order.pay_way
+        </dd>
+        <dt>
+            订单状态：
+        </dt>
+
+        <dd>
+            @if (ViewBag.order.state == 0)
+            {
+                <span>未发货</span>
+            }
+            else if (ViewBag.order.state == 1)
+            {
+                <span class="btn btn-warning">已发货</span>
+            }
+            else if (ViewBag.order.state == 2)
+            {
+                <span class="btn btn-success">已签收</span>
+            }
+            else
+            {
+                <span class="btn btn-danger">已完成</span>
+            }
+        </dd>
+
+        <dt>
+            下单人：
+        </dt>
+
+        <dd>
+            @ViewBag.order.user.username
+        </dd>
+        <dt>
+            订单操作：
+        </dt>
+
+        <dd>
+            @if (ViewBag.order.state == 0)
+            {
+                <a href="/Order/Send?order_id=@ViewBag.order.id&state=1" class="btn btn-danger" onclick="return confirm('商品未发货，是否现在发货？')">点击发货</a>
+            }
+            else if (ViewBag.order.state == 1)
+            {
+                <span class="btn btn-warning">商品已发货，等待用户签收</span>
+            }
+            else if (ViewBag.order.state == 2)
+            {
+                <a href="/Order/Send?order_id=@ViewBag.order.id&state=3" class="btn btn-danger" onclick="return confirm('商品未发货，是否现在发货？')">用户已签收，点击订单完成</a>
+            }
+            else
+            {
+                <input class="btn btn-success" value="订单已完成" type="button" />
+            }
+        </dd>
+    </dl>
+</div>
+<hr />
+<h2 align="center">收货信息</h2>
+<table class="table">
+    <tr>
+        <th>
+            收货人：@ViewBag.order.name
+        </th>
+        <th>
+            联系电话：@ViewBag.order.phone
+        </th>
+        <th>
+            收货地址：@ViewBag.order.address
+        </th>
+    </tr>
+</table>
+<hr />
+<h2 align="center">订单详情</h2>
+<table class="table">
+    <tr>
+        <th>
+            封面
+        </th>
+        <th>
+            商品名称
+        </th>
+        <th>
+            下单数量
+        </th>
+        <th>
+            商品金额
+        </th>
+        <th>
+            总价
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                <img src="@item.shopping.img" width="50" height="50" alt="Alternate Text" />
+            </th>
+            <th>
+                @item.title
+            </th>
+            <th>
+                @item.count
+            </th>
+            <th>
+                @item.price
+            </th>
+            <th>
+                @item.sum_price
+            </th>
+        </tr>
+    }
+</table>
+<center>
+    <a href="javascript:void(0)" class="btn btn-info" onclick="window.history.back(-1);">返回</a>
+</center>
+

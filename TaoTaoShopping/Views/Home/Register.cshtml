@@ -1,0 +1,113 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>智能商城注册</title>
+    <link rel="stylesheet" type="text/css" href="/Content/css/login.css" />
+</head>
+<body>
+    <div id="append"></div>
+    <div class="full_sc">
+        <div class="head_cent head_cwo ClearFix">
+            <div class="h_logo">
+            </div>
+            <div class="h_right">
+                <img src="/Content/image/top_center.jpg" />
+            </div>
+        </div>
+    </div>
+    <div class="w980 ClearFix">
+        <div class="logo_box ClearFix">
+            <div class="login_b_l ClearFix">
+                <a href="" title="出发">
+                    <img src="/Content/image/register.jpg" alt="出发" />
+                </a>
+            </div>
+            <div class="login_b_r ClearFix">
+                <div class="loginul ClearFix">
+                    <div class="login_h2 ClearFix">
+                        <h2>用户注册</h2>
+                        <div class="lognrtop">
+                            已有账号<a href="/Home/Login">在此登录</a>
+                        </div>
+                    </div>
+                    <div class="co">
+                        <div class="form">
+                            <form id="register_form" method="post" action="">
+                                <div class="item">
+                                    <input placeholder="请输入账号" class="itxt" autocomplete="off" tabindex="1" maxlength="11" name="username" id="username" type="text">
+                                    <div class="err_box">
+                                        <div class="err_msg2" style="display: none;" id="error_mobile">请输入用户名</div>
+                                    </div>
+                                </div>
+                                <div class="item item2">
+                                    <input placeholder="请输入密码" tabindex="4" maxlength="20" class="itxt" name="pwd" id="pwd" type="password">
+                                    <div class="err_box">
+                                        <div class="err_msg2" style="display: none;" id="error_password">请输入您的密码,您的密码可能为字母、数字或符号组合</div>
+                                    </div>
+                                </div>
+                                <div class="item item2">
+                                    <input placeholder="请再次输入密码" class="itxt" tabindex="5" maxlength="20" name="password_confirm" id="password_confirm" type="password">
+                                    <div class="err_box">
+                                        <div class="err_msg2" style="display: none;" id="error_password_confirm">请输入您的密码,您的密码可能为字母、数字或符号组合</div>
+                                    </div>
+                                </div>
+                                <div class="item item3">
+                                    <input placeholder="昵称" autocomplete="off" tabindex="6" maxlength="4" size="10" class="itxt" name="nickname" id="nickname" type="text">
+                                </div>
+                                <div class="item item5">
+                                    <div class="login-btn">
+                                        <a id="loginsubmit" tabindex="7" class="btn-img btn-entry" href="javascript:;">立即注册</a>
+                                    </div>
+                                    <div class="agree">
+                                        <input class="jdcheckbox" tabindex="8" name="agree" id="agree" checked="checked" type="checkbox">
+                                        <label for="autoLogin">注册即表示同意智能商城<span><a href="" target="_blank">《用户服务协议》</a></span>条款</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+@* 引入jquery的类库 *@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $("#loginsubmit").click(function () {
+        //获取用户名和密码回来
+        var username = $("#username").val();
+        var pwd = $("#pwd").val();
+        var password_confirm = $("#password_confirm").val();
+        var nickname = $("#nickname").val();
+        if (username.length < 1) {
+            alert("请输入用户名！");
+            return;
+        }
+        if (pwd.length < 1) {
+            alert("请输入密码！");
+            return;
+        }
+        if (password_confirm.length < 1) {
+            alert("请输入确认密码！");
+            return;
+        }
+        if (password_confirm != pwd) {
+            alert("密码和确认密码不一致！");
+            return;
+        }
+        if (nickname.length < 1) {
+            alert("请输入昵称！");
+            return;
+        }
+        //提交表单
+        $("#register_form").submit();
+    });
+</script>

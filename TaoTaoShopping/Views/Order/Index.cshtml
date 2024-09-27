@@ -1,0 +1,96 @@
+﻿@model IEnumerable<TaoTaoShopping.Models.order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 align="center">订单管理</h2>
+@* 搜索区域 *@
+<div class="row" style="margin:10px 0;">
+    <div class="col-lg-12">
+        <center>
+            <form action="" method="get">
+                搜索昵称的订单： <input type="text" class="form-control" style="display:inline-block;width:200px;" name="keyword" value="@(Request.QueryString["keyword"] != null ? Request.QueryString["keyword"]:"" )" placeholder="请输入关键字" /> <input type="submit" name="submit" value="搜索" class="btn btn-info" />
+            </form>
+        </center>
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            订单编号
+        </th>
+        <th>
+            订单金额
+        </th>
+        <th>
+            备注
+        </th>
+        <th>
+            下单时间
+        </th>
+        <th>
+            是否支付
+        </th>
+        <th>
+            订单状态
+        </th>
+        <th>
+            下单人
+        </th>
+        <th>操作</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.order_num)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sum_price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mark)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createtime)
+            </td>
+            <td>
+                @if(item.is_pay == 0)
+                {
+                    <span>未支付</span>
+                }
+                else
+                {
+                    <span class="btn btn-success">已支付</span>
+                }
+            </td>
+            <td>
+                @if (item.state == 0)
+                {
+                    <span>未发货</span>
+                }
+                else if (item.state == 1)
+                {
+                    <span class="btn btn-warning">已发货</span>
+                }
+                else if (item.state == 2)
+                {
+                    <span class="btn btn-success">已签收</span>
+                }
+                else
+                {
+                    <span class="btn btn-danger">已完成</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user.username)
+            </td>
+            <td>
+                <a href="/Order/Details?id=@item.id" class="btn btn-success">订单</a>
+            </td>
+        </tr>
+    }
+
+</table>

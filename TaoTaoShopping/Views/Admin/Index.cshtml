@@ -1,0 +1,7 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>欢迎使用智能商城</h1>
+<p>欢迎你管理员：<strong>@(Session["nickname"] != null ? Session["nickname"].ToString():"")</strong>。登录时间：@DateTime.Now</p>

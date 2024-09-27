@@ -1,0 +1,111 @@
+﻿@model  TaoTaoShopping.Models.shopping
+@{
+    ViewBag.Title = "Pay";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="w1200">
+    <!-- 购物车核心代码 -->
+    <link rel="stylesheet" href="~/Content/css/buycar.css">
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <h2 class="title">下单结算</h2>
+    <table class="table" id="table">
+        <tr>
+            <td>商品图</td>
+            <td>商品名称</td>
+            <td>商品价格</td>
+            <td>购买数量</td>
+            <td>总金额</td>
+        </tr>
+        <tr>
+            <td>
+                <img src="@Model.img" width="50" height="50" alt="">
+            </td>
+            <td>@Model.title</td>
+            <td>￥@Model.sale_price</td>
+            <td>@ViewBag.shopNum</td>
+            <td>￥@(Model.sale_price * ViewBag.shopNum)</td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
+            <td>总计：￥@(Model.sale_price * ViewBag.shopNum)</td>
+            <td></td>
+        </tr>
+    </table>
+    <h3>我的地址</h3>
+    <table class="table">
+        @for (int i = 0; i < ViewBag.address.Count; i++)
+        {
+            <tr>
+                <th>
+                    <input type="radio" name="address" checked value="@ViewBag.address[i].id" id="s@(ViewBag.address[i].id)">
+                    <label for="s@(ViewBag.address[i].id)"> @ViewBag.address[i].name-@ViewBag.address[i].phone-@ViewBag.address[i].address1 </label>
+                    <a href="/Addresse/Index" target="_blank">管理我的地址</a>
+                </th>
+            </tr>
+        }
+    </table>
+    @if (ViewBag.address.Count == 0)
+    {
+        <p>你未添加地址，请先添加地址。<a href="/Addresse/Index" target="_blank">管理我的地址</a></p>
+    }
+    <h3>支付方式</h3>
+    <table class="table">
+        <tr>
+            <th>
+                <input type="radio" name="pay" checked value="支付宝" id="ss2"> <label for="ss2"> 支付宝</label>  &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="pay" value="微信" id="ss3"> <label for="ss3"> 微信</label>  &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="pay" value="银行卡" id="ss4"> <label for="ss4"> 银行卡</label>  &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="pay" value="信用卡" id="ss5"> <label for="ss5"> 信用卡</label>  &nbsp;&nbsp;&nbsp;&nbsp;
+
+            </th>
+        </tr>
+    </table>
+    <h3>订单备注</h3>
+    <textarea style="width:100%;height:40px;" placeholder="请输入需要备注的内容" id="mark"></textarea>
+
+    <center>
+        <input type="button" id="buy" onclick="buy()" value="结算" class="buyBtn">
+    </center>
+    <script>
+        function buy() {
+            //判断用户是否有选中地址
+            if ($("input[name='address']:checked").length == 0) {
+                alert("请先添加下单地址！");
+                return;
+            }
+            alert("将会跳转第三方支付！");
+            //执行操作
+            if (confirm("是否已支付完成?")) {
+                $.ajax({
+                    url: "/Home/Pay2",
+                    type: "post",
+                    data: {
+                        address_id: $("input[name='address']:checked").val(),
+                        payWay: $("input[name='pay']:checked").val(),
+                        mark: $("#mark").val(),
+                        shopId:@Model.id,
+                        shopNum:@ViewBag.shopNum
+                    },
+                    success: function (res) {
+                        if (res == "200") {
+                            alert("支付成功！");
+                            window.location.href = "/Order/Index2"; //到订单页
+                        } else {
+                            alert("支付失败！")
+                        }
+                    },
+                    error: function (res) {
+                        alert("请求异常，支付失败！")
+                    },
+                });
+
+            } else {
+                alert("请重新点【结算】！");
+            }
+
+
+        }
+    </script>
+    <!-- 购物车核心代码结束 -->
+</div>

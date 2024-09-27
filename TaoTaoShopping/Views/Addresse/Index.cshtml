@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TaoTaoShopping.Models.address>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2 align="center">地址管理</h2>
+
+<p>
+    <a href="/Addresse/Create" class="btn btn-success">添加地址</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            收货地址
+        </th>
+        <th>
+            收货人
+        </th>
+        <th>
+            联系电话
+        </th>
+        <th>
+            备注
+        </th>
+        <th>
+            创建时间
+        </th>
+        <th>
+            所属人地址
+        </th>
+        <th>操作</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.address1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mark)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createtime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user.username)
+            </td>
+            <td>
+                <a href="/Addresse/Edit?id=@item.id" class="btn btn-warning">编辑</a>
+                <a href="/Addresse/Delete?id=@item.id" onclick="return confirm('是否删除该数据？')" class="btn btn-danger">删除</a>
+            </td>
+        </tr>
+    }
+
+</table>

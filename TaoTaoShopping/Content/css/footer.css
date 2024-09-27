@@ -1,0 +1,282 @@
+/**
+ * 底部
+ */
+.footer {
+	width: 100%;
+    background-color: #fff;
+    margin-top: 40px;
+    overflow: hidden;
+}
+
+.footer_help {
+    padding-top: 40px;
+    height: 156px;
+}
+.footer1_l {
+    float: left;
+    width: 900px;
+}
+.footer1_r {
+    float: left;
+}
+.helpDl{
+	float: left;
+	padding: 0 50px 0 50px;
+}
+.helpDl h5 {
+    font-size: 14px;
+    font-weight: normal;
+    height: 31px;
+    color: #666666;
+}
+.helpDl dd a {
+    color: #666;
+    font-size: 12px;
+    height: 22px;
+    line-height: 22px;
+}
+.footer1_r ul li {
+    float: left;
+    width: 100px;
+    margin-right: 20px;
+    text-align: center;
+}
+.footer1_r ul li h2 {
+    color: #333333;
+    font-size: 14px;
+    font-weight: 600;
+    height: 31px;
+}
+.footer1_r ul li p {
+    font-size: 14px;
+    color: #666666;
+}
+.footer_nav {
+    border-bottom: 4px solid #a90202;
+    overflow: hidden;
+    margin-top: 45px;
+}
+.w720 {
+    width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+.footer_nav ul li{
+	display: inline-block;
+	height: 35px;
+	line-height: 35px;
+	padding-right: 12px;
+}
+.footer_nav ul li a {
+    font-size: 12px;
+    font-family: "宋体";
+    color: #666666;
+}
+.footer_bottom{
+	background: #F3F3F3;
+}
+.footer_bottom p {
+    padding-top: 10px;
+    text-align: center;
+    font-family: "宋体";
+    color: #7e7e7e;
+    line-height: 25px;
+}
+.font_arial {
+    font-family: Arial;
+    color: #666666;
+}
+.footer_bottom .footer_p {
+    padding: 30px 0 40px 0;
+}
+/**
+ * 右侧导航
+ */
+.fixed_dh{
+	color: #FFF;
+	text-align: center;
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 40px;
+	height: 100%;
+	background: #444851;
+	z-index: 49;
+}
+.fixed_con{
+	position: relative;
+	height: 100%;
+	z-index: 50;
+}
+.f_r_top{
+	position: absolute;
+	right: 0;
+	height: 360px;
+	margin-top: 45px;
+}
+.f_r_top span{
+	font-size: 12px;
+	line-height: 16px;
+}
+.top_i{
+	width: 40px;
+	height:40px;
+	margin: 5px 0;
+	padding: 5px 0;
+	background: #444851;
+}
+.top_i:hover{
+	background: #94193F;
+}
+.icon_user {
+    display: block;
+    background: url(./../image/icon_list.png) -190px -413px;
+    width: 30px;
+    height: 23px;
+    margin: 0;
+}
+.f_line1{
+	width: 100%;
+	height: 1px;
+	background: #2D2E32;
+	margin-top: 15px;
+}
+.f_line2{
+	width: 100%;
+	height: 1px;
+	background: #575A62;
+	margin-bottom: 15px;
+}
+/*购物车*/
+.f_gwc{
+	width: 100%;
+	height: 142px;
+	margin: 5px 0;
+	background: #444851;
+}
+.f_gwc:hover{
+	background: #94193F;
+}
+.f_gwc a{
+	display:inline-block;
+	padding: 5px 0;
+	width: 100%;
+	height: 132;
+}
+.f_gwc .icon_car {
+    display: inline-block;
+    margin-top: 5px;
+    background: url(./../image/icon_list.png) -76px 0;
+    width: 40px;
+    height: 25px;
+}
+.f_gwc span{
+	width: 17px;
+    color: #fff;
+    display: inherit;
+    font-size: 12px;
+    padding: 0 11px;
+}
+.f_gwc .car_num {
+	display: inline-block;
+    color: #fff;
+    background: url(./../image/icon_list.png) -84px -65px;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    line-height: 22px;
+    text-align: center;
+    margin: 14px 9px 0 9px;
+}
+.icon_collect {
+    display: block;
+    background: url(./../image/icon_list.png) -83px -188px;
+    width: 22px;
+    height: 21px;
+    margin: 0 9px;
+}
+/*左侧底部*/
+.f_bottom{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 40px;
+	height: 188px;
+}
+.f_sao{
+	margin: 5px 0;
+	width: 40px;
+	height: 40px;
+	background: #444851;
+	position: relative;
+}
+.f_sao .sao:hover{
+	background: #94193F;
+}
+.f_sao .sao:hover .ewm_tc{
+	display: block;
+}
+.ewm_tc {
+	display: none;
+    position: absolute;
+    right: 39px;
+    bottom: -40px;
+}
+.ewm_tc_bg {
+    border-radius: 5px;
+    color: #000;
+    height: 271px;
+    padding: 10px;
+    text-align: center;
+    width: 173px;
+}
+.down_app_icon {
+    position: absolute;
+    right: -8px;
+    bottom: 51px;
+    height: 16px;
+    width: 8px;
+    z-index: 55;
+    background: url(./../image/icon_list.png) no-repeat -3px -585px;
+}
+
+.ewm_img {
+    display: inline-block;
+    background: url(./../image/icon_list.png) -170px 0;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+}
+.f_ke{
+	margin: 15px 0;
+}
+.f_ke:hover{
+	background: #94193F;
+}
+.online_cus {
+    display: inline-block;
+    background: url(./../image/icon_list.png) -170px -58px;
+    width: 25px;
+    height: 32px;
+    margin: 5px 3px 5px 5px;
+}
+.top_is{
+	width: 40px;
+	height:40px;
+	margin: 5px 0;
+	padding: 5px 0;
+	background: #444851;
+}
+.top_is:hover{
+	background: #94193F;
+}
+.top_is a {
+	display: inline-block;
+}
+.retrun_top {
+    display: inline-block;
+    background: url(./../image/icon_list.png) -83px -252px;
+    width: 19px;
+    height: 19px;
+    margin: 5px 10px;
+}
